@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -30,13 +31,25 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
   });
-  
+  const last = useMemo(() => {
+    if (data && data.events && data.events.length > 0) {
+      return data.events.reduce((latest, current) => {
+        // Utiliser la date pour comparer et trouver la prestation la plus récente
+        const latestDate = new Date(latest.date);
+        const currentDate = new Date(current.date);
+
+        return currentDate > latestDate ? current : latest;
+      });
+    }
+    return null;
+  }, [data]);
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
+        last,
       }}
     >
       {children}
