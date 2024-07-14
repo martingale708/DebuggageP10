@@ -115,7 +115,7 @@ const Page = () => {
       </div>
     </main>
     <footer className="row">
-      <div className="col presta">
+    <div className="col presta">
           <h3>Notre derniére prestation</h3>
           {/* SI last est defini alors le composant EvenCArd est rendu */}
           {last && (
