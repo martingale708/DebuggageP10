@@ -33,8 +33,6 @@ const EventList = () => {
       return false;
     });
   const changeType = (evtType) => {
-    // eslint-disable-next-line 
-    console.log('Changing type to:', evtType); // Vérifiez la sélection de type
     setCurrentPage(1);
     setType(evtType);
   };
@@ -51,8 +49,6 @@ const EventList = () => {
           <Select
   selection={Array.from(typeList)}
   onChange={(value) => {
-    // eslint-disable-next-line 
-    console.log('Selected type:', value); // Vérifiez la valeur sélectionnée
     if (value) {
       changeType(value);
     } else {
@@ -60,24 +56,20 @@ const EventList = () => {
     }
   }}
 />
-          <div id="events" className="ListContainer">
-            {filteredEvents.map((event) => {
-              // eslint-disable-next-line 
-  console.log("lesId",event.id);
-  return (
-    <Modal key={event.id} Content={<ModalEvent event={event} />}>
-      {({ setIsOpened }) => (
-        <EventCard
-          onClick={() => setIsOpened(true)}
-          imageSrc={event.cover}
-          title={event.title}
-          date={new Date(event.date)}
-          label={event.type}
-        />
-      )}
-    </Modal>
-  );
-})}
+<div id="events" className="ListContainer">
+{filteredEvents.map((event) => (
+  <Modal key={event.id} Content={<ModalEvent event={event} />}>
+    {({ setIsOpened }) => (
+      <EventCard
+        onClick={() => setIsOpened(true)}
+        imageSrc={event.cover}
+        title={event.title}
+        date={new Date(event.date)}
+        label={event.type}
+      />
+    )}
+  </Modal>
+))}
           </div>
           <div className="Pagination">
             {[...Array(pageNumber || 0)].map((_, n) => (
